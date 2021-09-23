@@ -28,21 +28,20 @@ class OwnersController extends Controller
     public function index()
     {
 
-       $date_now=Carbon::now();
+       //$date_now=Carbon::now();
        //現在時刻を表示
-       $date_parse=Carbon::parse(now());
+      // $date_parse=Carbon::parse(now());
        //現在時刻を表示
-       $date_parse2=Carbon::parse(now());
+      // $date_parse2=Carbon::parse(now());
        //年のみ表示
-       echo $date_now."<br>";
-       echo $date_parse."<br>";
-       echo $date_parse2->year."<br>";
+       //echo $date_now."<br>";
+       //echo $date_parse."<br>";
+       //echo $date_parse2->year."<br>";
 
 
-
-        $e_all=Owner::all();
+       // $e_all=Owner::all();
         //Eloquant
-        $q_get=DB::table('owners')->select('name','created_at')->get();
+        //$q_get=DB::table('owners')->select('name','created_at')->get();
         //クエリビルダー
        // $q_first=DB::table('owners')->select('name')->first();
          //クエリビルダー
@@ -50,8 +49,21 @@ class OwnersController extends Controller
 //             'name' => 'てすと'
 //         ]);
         //dd($e_all,$q_get,$q_first,$c_test);
-        return view('admin.owners.index',compact('e_all','q_get'));
+        //return view('admin.owners.index',compact('e_all','q_get'));
         //compactの中身は$つけない
+
+        $owners=Owner::select('name','email','created_at')->get();
+
+        return view('admin.owners.index',compact('owners'));
+
+
+
+
+
+
+
+
+
     }
 
     /**
@@ -61,7 +73,7 @@ class OwnersController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.owners.create');
     }
 
     /**
