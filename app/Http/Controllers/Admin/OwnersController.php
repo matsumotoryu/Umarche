@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Owner; //Eloquent
 use Illuminate\Support\Facades\DB; //クエリビルダー
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Hash;
 
 class OwnersController extends Controller
 {
@@ -83,8 +83,26 @@ class OwnersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    //Requestはフォームで入力された値、それが$requestでインスタンス化されている
     {
-        //
+         $request->validate([
+	//Auth/RegisterdUserControllerからコピペする,passwordのmin:8の部分のみ変えている。
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:owners'],
+            'password' => ['required', 'confirmed','min:8'],
+        ]);
+        Owner::create([
+	//Auth/RegisterdUserControllerからコピペする
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()
+        ->route('admin.owners.index')
+        ->with('message','オーナ登録を完了しました。');
+        //オーナ登録を完了しました。とadmin.owners.indexで表示する
+
     }
 
     /**

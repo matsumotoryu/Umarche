@@ -54,6 +54,9 @@ class LoginRequest extends FormRequest
         }
 
         if (! Auth::guard($guard)->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+	        //attempt()はログインフォームからの認証試行を処理するために使用される、
+	        //パスワードが合っていればセッションを開始する
+	        //only()引数に指定した値だけ取得することができます。
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([

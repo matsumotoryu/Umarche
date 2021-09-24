@@ -10,13 +10,16 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 	        <section class="text-gray-600 body-font">
+	          <x-flash-message status="info" />
+	      {{-- components/flash-message.blade.phpに登録時にメッセージが表示されるようになるコードが書いてある  --}}
 		<div class="container px-5 py-8 mx-auto">
-			{{--このpyで上の余白を調整する--}}
+			{{-- このpyで上の余白を調整する --}}
+
 		  <div class="lg:w-2/3 w-full mx-auto overflow-auto">
 		    <div class="flex justify-end mb-4 ">
-			{{-- justify-endで右に移動する--}}
+			{{-- justify-endで右に移動する --}}
 		      <button onclick="location.href='{{route('admin.owners.create')}}'" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">新規登録する</button>
-		           {{--onclick="location.href='{{ route('admin.owners.create')}}'"  aタグではなくonclickが推奨されている --}}
+		           {{-- onclick="location.href='{{ route('admin.owners.create')}}'"  aタグではなくonclickが推奨されている --}}
 		    </div>
 		    <table class="table-auto w-full text-left whitespace-no-wrap">
 		    <thead>
